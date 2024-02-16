@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:task_5/db_helper.dart';
-import 'package:task_5/student_list.dart';
+import 'package:student_app_getx/db_helper.dart';
+import 'package:student_app_getx/student_list.dart';
 
 class StudentEdit extends StatefulWidget {
   final int id;

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:task_5/student_add_page.dart';
-import 'package:task_5/student_edit.dart';
-import 'package:task_5/student_profile.dart';
+import 'package:student_app_getx/student_add_page.dart';
+import 'package:student_app_getx/student_edit.dart';
+import 'package:student_app_getx/student_profile.dart';
 import 'dart:io';
 import 'db_helper.dart';
 
