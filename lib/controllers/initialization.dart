@@ -1,0 +1,9 @@
+import 'package:get/get.dart';
+import 'package:student_app_getx/controllers/student_controller.dart';
+
+class InitializeControllers implements Bindings {
+  @override
+  void dependencies() {
+    Get.put(StudentController());
+  }
+}

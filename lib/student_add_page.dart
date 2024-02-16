@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:student_app_getx/model/student_model.dart';
 import 'dart:io';
 import 'student_list.dart';
 import 'package:flutter/services.dart';
-import 'db_helper.dart';
+import 'db helper/db_helper.dart';
 import 'package:image_picker/image_picker.dart';
 
 class StudentAdd extends StatefulWidget {
@@ -24,8 +25,15 @@ class _StudentAddState extends State<StudentAdd> {
   final TextEditingController phoneController = TextEditingController();
 
   Future<void> addData() async {
-    await SQLHelper.createData(nameController.text, ageController.text,
-        phoneController.text, imagePath.toString(), groupValue.toString());
+    StudentModel stu = StudentModel(
+        name: nameController.text,
+        age: ageController.text,
+        gender: groupValue.toString(),
+        images: imagePath.toString(),
+        phone: phoneController.text);
+
+    await SQLHelper.createData(stu);
+    
   }
 
   bool _isPhotoSelected = false;

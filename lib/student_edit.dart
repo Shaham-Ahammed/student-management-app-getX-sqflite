@@ -3,7 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:student_app_getx/db_helper.dart';
+import 'package:student_app_getx/db%20helper/db_helper.dart';
+import 'package:student_app_getx/model/student_model.dart';
 import 'package:student_app_getx/student_list.dart';
 
 class StudentEdit extends StatefulWidget {
@@ -26,7 +27,6 @@ class StudentEdit extends StatefulWidget {
 }
 
 class _StudentEditState extends State<StudentEdit> {
- 
   TextEditingController nameController = TextEditingController();
   TextEditingController ageController = TextEditingController();
   TextEditingController phoneController = TextEditingController();
@@ -38,8 +38,14 @@ class _StudentEditState extends State<StudentEdit> {
   String? groupValue;
 
   Future<void> updateData(int id) async {
-    await SQLHelper.updateData(id, nameController.text, ageController.text,
-        phoneController.text, imagePath.toString(), groupValue.toString());   
+    StudentModel stu = StudentModel(
+        name: nameController.text,
+        age: ageController.text,
+        gender: groupValue.toString(),
+        images: imagePath.toString(),
+        phone: phoneController.text);
+
+    await SQLHelper.updateData(id, stu);
   }
 
   @override
@@ -49,7 +55,7 @@ class _StudentEditState extends State<StudentEdit> {
 
     phoneController = TextEditingController(text: widget.phone);
     imagePath = widget.image;
-    groupValue=widget.gender;
+    groupValue = widget.gender;
     super.initState();
   }
 

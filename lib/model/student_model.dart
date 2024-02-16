@@ -1,12 +1,15 @@
 class StudentModel {
+  int? id;
   String name;
   String age;
   String phone;
   String gender;
   String images;
-  
+
   StudentModel(
-      {required this.name,
+      {
+        this.id,
+        required this.name,
       required this.age,
       required this.gender,
       required this.images,

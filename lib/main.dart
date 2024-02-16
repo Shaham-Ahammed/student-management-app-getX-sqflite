@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:get/get_navigation/src/root/get_material_app.dart';
+import 'package:student_app_getx/controllers/initialization.dart';
 
 import 'student_list.dart';
 
@@ -11,9 +13,10 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return GetMaterialApp(
+      initialBinding: InitializeControllers(),
       theme:
-          ThemeData(primarySwatch: Colors.cyan, primaryColor: Colors.cyan[800]),
+          ThemeData(primarySwatch: Colors.cyan, primaryColor: Colors.cyan[800],appBarTheme:AppBarTheme(backgroundColor: Colors.cyan) ),
       debugShowCheckedModeBanner: false,
       home: StudentList(),
     );
