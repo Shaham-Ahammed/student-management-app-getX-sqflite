@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:student_app_getx/controllers/student_controller.dart';
-import 'package:student_app_getx/student_add_page.dart';
-import 'package:student_app_getx/student_edit.dart';
-import 'package:student_app_getx/student_profile.dart';
+import 'package:student_app_getx/screens/add%20student/student_add_page.dart';
+import 'package:student_app_getx/screens/student_edit.dart';
+import 'package:student_app_getx/screens/student_profile.dart';
 import 'dart:io';
-import 'db helper/db_helper.dart';
+import '../db helper/db_helper.dart';
 
 class StudentList extends StatelessWidget {
   const StudentList({super.key});

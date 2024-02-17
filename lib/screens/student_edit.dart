@@ -5,7 +5,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:student_app_getx/db%20helper/db_helper.dart';
 import 'package:student_app_getx/model/student_model.dart';
-import 'package:student_app_getx/student_list.dart';
+import 'package:student_app_getx/screens/student_list.dart';
 
 class StudentEdit extends StatefulWidget {
   final int id;
