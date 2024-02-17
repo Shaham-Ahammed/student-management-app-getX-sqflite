@@ -1,37 +1,38 @@
+// ignore_for_file: must_be_immutable
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:student_app_getx/controllers/student_add_controller.dart';
 import 'package:student_app_getx/model/student_model.dart';
 import 'dart:io';
-import 'student_list.dart';
+
 import 'package:flutter/services.dart';
 import 'db helper/db_helper.dart';
 import 'package:image_picker/image_picker.dart';
 
-class StudentAdd extends StatefulWidget {
+class StudentAdd extends StatelessWidget {
+
   StudentAdd({Key? key}) : super(key: key);
 
-  @override
-  State<StudentAdd> createState() => _StudentAddState();
-}
+  
 
-class _StudentAddState extends State<StudentAdd> {
-  String? groupValue;
-  String? imagePath;
   late ImageSource _imageSource;
-  GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+
+  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
   final TextEditingController nameController = TextEditingController();
+
   final TextEditingController ageController = TextEditingController();
+
   final TextEditingController phoneController = TextEditingController();
 
   Future<void> addData() async {
     StudentModel stu = StudentModel(
         name: nameController.text,
         age: ageController.text,
-        gender: groupValue.toString(),
-        images: imagePath.toString(),
+        gender: addController.groupValue.value.toString(),
+        images: addController.imagpath.value.toString(),
         phone: phoneController.text);
 
     await SQLHelper.createData(stu);
@@ -39,9 +40,10 @@ class _StudentAddState extends State<StudentAdd> {
 
   bool genderErrorVisible = false;
 
+  StudentAddController addController = Get.find();
+
   @override
   Widget build(BuildContext context) {
-    StudentAddController addController = Get.find();
     return Scaffold(
       backgroundColor: Colors.cyan[100],
       appBar: AppBar(
@@ -197,7 +199,7 @@ class _StudentAddState extends State<StudentAdd> {
                     },
                   ),
                   TextFormField(
-                     autovalidateMode: AutovalidateMode.onUserInteraction,
+                    autovalidateMode: AutovalidateMode.onUserInteraction,
                     decoration: const InputDecoration(
                         enabledBorder: OutlineInputBorder(
                             borderSide:
@@ -223,7 +225,7 @@ class _StudentAddState extends State<StudentAdd> {
                     },
                   ),
                   TextFormField(
-                     autovalidateMode: AutovalidateMode.onUserInteraction,
+                    autovalidateMode: AutovalidateMode.onUserInteraction,
                     decoration: const InputDecoration(
                         enabledBorder: OutlineInputBorder(
                             borderSide:
@@ -257,40 +259,45 @@ class _StudentAddState extends State<StudentAdd> {
                         'Select Gender :',
                         style: myStyle(16, FontWeight.bold, Colors.black),
                       ),
-                      Row(
-                        children: [
-                          Radio(
-                              activeColor: Colors.red,
-                              value: 'Male',
-                              groupValue: groupValue,
-                              onChanged: (value) {
-                                setState(() {
-                                  groupValue = value;
-                                });
-                              }),
-                          Text('Male',
-                              style:
-                                  myStyle(12, FontWeight.bold, Colors.black)),
-                          Radio(
-                              activeColor: Colors.red,
-                              value: 'Female',
-                              groupValue: groupValue,
-                              onChanged: (value) {
-                                setState(() {
-                                  groupValue = value;
-                                });
-                              }),
-                          Text('Female',
-                              style: myStyle(12, FontWeight.bold, Colors.black))
-                        ],
-                      ),
+                      Obx(() {
+                        return Row(
+                          children: [
+                            Radio(
+                                activeColor: Colors.red,
+                                value: 'Male',
+                                groupValue: addController.groupValue.value,
+                                onChanged: (value) {
+                                  addController.selectGender(value!);
+                                }),
+                            Text('Male',
+                                style:
+                                    myStyle(12, FontWeight.bold, Colors.black)),
+                            Radio(
+                                activeColor: Colors.red,
+                                value: 'Female',
+                                groupValue: addController.groupValue.value,
+                                onChanged: (value) {
+                                  addController.selectGender(value!);
+                                }),
+                            Text('Female',
+                                style:
+                                    myStyle(12, FontWeight.bold, Colors.black))
+                          ],
+                        );
+                      }),
                     ],
                   ),
-                  if (genderErrorVisible && groupValue == null)
-                    const Text(
-                      'Please select a gender',
-                      style: TextStyle(color: Colors.red),
-                    ),
+                  Obx(() {
+                    if (addController.genderErrorVisible.value &&
+                        addController.groupValue.value.isEmpty) {
+                      return const Text(
+                        'Please select a gender',
+                        style: TextStyle(color: Colors.red),
+                      );
+                    } else {
+                      return Container();
+                    }
+                  })
                 ],
               ),
             ),
@@ -306,20 +313,15 @@ class _StudentAddState extends State<StudentAdd> {
                 if (!addController.isPhotoSelected.value) {
                   addController.showImageError();
                 }
-                if (groupValue == null) {
-                  setState(() {
-                    genderErrorVisible = true;
-                  });
+                if (addController.groupValue.value.isEmpty) {
+                  addController.showGenderError();
                 }
                 if (_formKey.currentState!.validate() &&
-                  addController.isPhotoSelected.value == true &&
-                    groupValue != null) {
+                    addController.isPhotoSelected.value == true &&
+                    addController.groupValue.value.isNotEmpty) {
                   await addData();
-
-                  Navigator.of(context).pushAndRemoveUntil(
-                      MaterialPageRoute(
-                          builder: (context) => const StudentList()),
-                      (route) => false);
+                  Get.back();
+                  addController.onClose();
                 } else {
                   return;
                 }
@@ -336,8 +338,7 @@ class _StudentAddState extends State<StudentAdd> {
   void _getImage() async {
     final selectedImage = await ImagePicker().pickImage(source: _imageSource);
     if (selectedImage != null) {
-      Get.find<StudentAddController>().addimage(selectedImage.path);
-    
+     addController.addimage(selectedImage.path);
     }
   }
 }
