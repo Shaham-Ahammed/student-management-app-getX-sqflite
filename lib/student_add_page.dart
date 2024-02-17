@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:student_app_getx/controllers/student_add_controller.dart';
 import 'package:student_app_getx/model/student_model.dart';
 import 'dart:io';
 import 'student_list.dart';
@@ -33,15 +35,13 @@ class _StudentAddState extends State<StudentAdd> {
         phone: phoneController.text);
 
     await SQLHelper.createData(stu);
-    
   }
 
-  bool _isPhotoSelected = false;
-  bool photoerrorVisible = false;
   bool genderErrorVisible = false;
 
   @override
   Widget build(BuildContext context) {
+    StudentAddController addController = Get.find();
     return Scaffold(
       backgroundColor: Colors.cyan[100],
       appBar: AppBar(
@@ -53,7 +53,7 @@ class _StudentAddState extends State<StudentAdd> {
         centerTitle: true,
       ),
       body: SingleChildScrollView(
-        padding: EdgeInsets.all(10),
+        padding: const EdgeInsets.all(10),
         child: Column(crossAxisAlignment: CrossAxisAlignment.center, children: [
           Stack(
             children: [
@@ -65,7 +65,8 @@ class _StudentAddState extends State<StudentAdd> {
                             backgroundColor: Colors.cyan[50],
                             shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(10),
-                                side: BorderSide(width: 5, color: Colors.cyan)),
+                                side: const BorderSide(
+                                    width: 5, color: Colors.cyan)),
                             title: Row(
                               mainAxisAlignment: MainAxisAlignment.spaceAround,
                               children: [
@@ -84,7 +85,7 @@ class _StudentAddState extends State<StudentAdd> {
                                                   rootNavigator: true)
                                               .pop();
                                         },
-                                        icon: Icon(
+                                        icon: const Icon(
                                           Icons.camera_alt_outlined,
                                           size: 35,
                                           color: Colors.black,
@@ -106,7 +107,7 @@ class _StudentAddState extends State<StudentAdd> {
                                                   rootNavigator: true)
                                               .pop();
                                         },
-                                        icon: Icon(
+                                        icon: const Icon(
                                           Icons.photo_outlined,
                                           size: 35,
                                           color: Colors.black,
@@ -118,44 +119,53 @@ class _StudentAddState extends State<StudentAdd> {
                           ));
                 },
                 child: Center(
-                  child: Container(
-                    width: 160,
-                    height: 160,
-                    decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(10),
-                        color: Colors.cyan),
-                    child: imagePath == null
-                        ? Image.asset(
-                            'assets/users.png',
-                            fit: BoxFit.cover,
-                          )
-                        : Image.file(
-                            File(
-                              imagePath!,
+                  child: Obx(() {
+                    return Container(
+                      width: 160,
+                      height: 160,
+                      decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(10),
+                          color: Colors.cyan),
+                      child: addController.imagpath.value.isEmpty
+                          ? Image.asset(
+                              'assets/users.png',
+                              fit: BoxFit.cover,
+                            )
+                          : Image.file(
+                              File(
+                                addController.imagpath.value,
+                              ),
+                              fit: BoxFit.cover,
                             ),
-                            fit: BoxFit.cover,
-                          ),
-                  ),
+                    );
+                  }),
                 ),
               ),
-              Positioned(
+              const Positioned(
                   right: 70,
                   top: 100,
                   child: CircleAvatar(
                     radius: 20,
                     backgroundColor: Color.fromARGB(255, 10, 199, 251),
                   )),
-              Positioned(right: 80, top: 107, child: Icon(Icons.add_a_photo))
+              const Positioned(
+                  right: 80, top: 107, child: Icon(Icons.add_a_photo))
             ],
           ),
-          SizedBox(
+          const SizedBox(
             height: 15,
           ),
-          if (photoerrorVisible && imagePath == null)
-            Text(
-              'Please add a photo',
-              style: TextStyle(color: Colors.red),
-            ),
+          Obx(() {
+            if (addController.imageErrorVisible.value &&
+                addController.imagpath.value.isEmpty) {
+              return const Text(
+                'Please add a photo',
+                style: TextStyle(color: Colors.red),
+              );
+            } else {
+              return Container();
+            }
+          }),
           Form(
             key: _formKey,
             child: Container(
@@ -165,7 +175,8 @@ class _StudentAddState extends State<StudentAdd> {
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
                   TextFormField(
-                    decoration: InputDecoration(
+                    autovalidateMode: AutovalidateMode.onUserInteraction,
+                    decoration: const InputDecoration(
                         enabledBorder: OutlineInputBorder(
                             borderSide:
                                 BorderSide(color: Colors.cyan, width: 1),
@@ -186,7 +197,8 @@ class _StudentAddState extends State<StudentAdd> {
                     },
                   ),
                   TextFormField(
-                    decoration: InputDecoration(
+                     autovalidateMode: AutovalidateMode.onUserInteraction,
+                    decoration: const InputDecoration(
                         enabledBorder: OutlineInputBorder(
                             borderSide:
                                 BorderSide(color: Colors.cyan, width: 1),
@@ -211,7 +223,8 @@ class _StudentAddState extends State<StudentAdd> {
                     },
                   ),
                   TextFormField(
-                    decoration: InputDecoration(
+                     autovalidateMode: AutovalidateMode.onUserInteraction,
+                    decoration: const InputDecoration(
                         enabledBorder: OutlineInputBorder(
                             borderSide:
                                 BorderSide(color: Colors.cyan, width: 1),
@@ -274,7 +287,7 @@ class _StudentAddState extends State<StudentAdd> {
                     ],
                   ),
                   if (genderErrorVisible && groupValue == null)
-                    Text(
+                    const Text(
                       'Please select a gender',
                       style: TextStyle(color: Colors.red),
                     ),
@@ -282,7 +295,7 @@ class _StudentAddState extends State<StudentAdd> {
               ),
             ),
           ),
-          SizedBox(
+          const SizedBox(
             height: 10,
           ),
           ElevatedButton(
@@ -290,10 +303,8 @@ class _StudentAddState extends State<StudentAdd> {
                   backgroundColor:
                       MaterialStateProperty.all<Color>(Colors.cyan)),
               onPressed: () async {
-                if (!_isPhotoSelected) {
-                  setState(() {
-                    photoerrorVisible = true;
-                  });
+                if (!addController.isPhotoSelected.value) {
+                  addController.showImageError();
                 }
                 if (groupValue == null) {
                   setState(() {
@@ -301,12 +312,13 @@ class _StudentAddState extends State<StudentAdd> {
                   });
                 }
                 if (_formKey.currentState!.validate() &&
-                    _isPhotoSelected == true &&
+                  addController.isPhotoSelected.value == true &&
                     groupValue != null) {
                   await addData();
 
                   Navigator.of(context).pushAndRemoveUntil(
-                      MaterialPageRoute(builder: (context) => StudentList()),
+                      MaterialPageRoute(
+                          builder: (context) => const StudentList()),
                       (route) => false);
                 } else {
                   return;
@@ -324,10 +336,8 @@ class _StudentAddState extends State<StudentAdd> {
   void _getImage() async {
     final selectedImage = await ImagePicker().pickImage(source: _imageSource);
     if (selectedImage != null) {
-      setState(() {
-        imagePath = selectedImage.path;
-        _isPhotoSelected = true;
-      });
+      Get.find<StudentAddController>().addimage(selectedImage.path);
+    
     }
   }
 }

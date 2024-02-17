@@ -58,7 +58,6 @@ class StudentList extends StatelessWidget {
                               images: controller.studentList[index].images,
                               gender: controller.studentList[index].gender,
                               phone: controller.studentList[index].phone)),
-
                           child: Card(
                             color: Colors.cyan[100],
                             margin: const EdgeInsets.all(15),
@@ -88,25 +87,19 @@ class StudentList extends StatelessWidget {
                                 mainAxisSize: MainAxisSize.min,
                                 children: [
                                   IconButton(
-                                    onPressed: () { 
-                                      Navigator.of(context).push(
-                                          MaterialPageRoute(
-                                              builder: (context) => StudentEdit(
-                                                  id: controller
-                                                      .studentList[index].id!,
-                                                  name: controller
-                                                      .studentList[index].name,
-                                                  age: controller
-                                                      .studentList[index].age,
-                                                  image: controller
-                                                      .studentList[index]
-                                                      .images,
-                                                  gender: controller
-                                                      .studentList[index]
-                                                      .gender,
-                                                  phone: controller
-                                                      .studentList[index]
-                                                      .phone)));
+                                    onPressed: () {
+                                      Get.to(() => StudentEdit(
+                                          id: controller.studentList[index].id!,
+                                          name: controller
+                                              .studentList[index].name,
+                                          age:
+                                              controller.studentList[index].age,
+                                          image: controller
+                                              .studentList[index].images,
+                                          gender: controller
+                                              .studentList[index].gender,
+                                          phone: controller
+                                              .studentList[index].phone));
                                     },
                                     icon: Icon(Icons.edit),
                                   ),
@@ -158,13 +151,13 @@ class StudentList extends StatelessWidget {
             actions: [
               TextButton(
                   onPressed: () {
-                    Navigator.of(context).pop();
+                    Get.back();
                   },
                   child: const Text("NO")),
               TextButton(
                   onPressed: () async {
                     await SQLHelper.deleteData(id);
-                    Navigator.of(context).pop();
+                    Get.back();
                     ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
                         backgroundColor: Colors.red,
                         content: Text("DATA DELTED"),
