@@ -13,6 +13,9 @@ import 'package:student_app_getx/screens/edit%20student/student_edit.dart';
   TextEditingController phoneController = TextEditingController();
 
 
+  myStyle(double size, FontWeight weight, Color clr) {
+  return TextStyle(fontSize: size, fontWeight: weight, color: clr);
+}
 
 
 Future<void> updateData(int id) async {

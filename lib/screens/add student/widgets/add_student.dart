@@ -29,7 +29,7 @@ class AddStudentButtonAndFinalValidation extends StatelessWidget {
               addController.groupValue.value.isNotEmpty) {
             await addData();
             Get.back();
-            addController.onClose();
+          //  addController.onClose();
           } else {
             return;
           }

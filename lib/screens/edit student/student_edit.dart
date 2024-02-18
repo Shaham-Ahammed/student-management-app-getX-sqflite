@@ -97,7 +97,7 @@ class StudentEdit extends StatelessWidget {
               onPressed: () async {
                 if (formKey.currentState!.validate()) {
                   await updateData(id);
-
+                  
                   Get.back();
                                     editController.onClose();
                 }

@@ -1,7 +1,8 @@
  import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:student_app_getx/screens/edit%20student/functions/functions.dart';
 
-import '../../add student/functions/functions.dart';
+
 
 Future<dynamic> imageSourceDialogue(BuildContext context) {
     return showDialog(

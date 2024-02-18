@@ -8,8 +8,8 @@ class StudentAddController extends GetxController {
   RxString groupValue = ''.obs;
   RxBool genderErrorVisible = false.obs;
 
-  @override
-  void onClose() {
+ 
+  void initialize() {
     imagpath.value = '';
     imageErrorVisible.value = false;
     isPhotoSelected.value = false;
@@ -18,7 +18,7 @@ class StudentAddController extends GetxController {
     nameController.clear();
     ageController.clear();
     phoneController.clear();
-    super.onClose();
+    
   }
 
   addimage(String imagePath) {

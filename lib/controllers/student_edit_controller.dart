@@ -19,11 +19,11 @@ class StudentEditController extends GetxController {
 
   @override
   void onClose() {
-    imagpath.value = '';
-    groupValue.value = '';
-       nameController.clear();
-    ageController.clear();
-    phoneController.clear();
+    // imagpath.value = '';
+    // groupValue.value = '';
+    //    nameController.clear();
+    // ageController.clear();
+    // phoneController.clear();
     super.onClose();
   }
 

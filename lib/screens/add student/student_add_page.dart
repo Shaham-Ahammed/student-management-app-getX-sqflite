@@ -14,6 +14,7 @@ class StudentAdd extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    addController.initialize();
     return Scaffold(
       backgroundColor: Colors.cyan[100],
       appBar: appBar(),
@@ -50,12 +51,4 @@ class StudentAdd extends StatelessWidget {
       ),
     );
   }
-
-
-
 }
-
-
-
-
-
