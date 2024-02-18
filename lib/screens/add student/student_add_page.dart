@@ -7,7 +7,7 @@ import 'package:student_app_getx/screens/add%20student/widgets/appBar.dart';
 import 'package:student_app_getx/screens/add%20student/widgets/error_displays.dart';
 import 'package:student_app_getx/screens/add%20student/widgets/image_selection_alert.dart';
 import 'package:student_app_getx/screens/add%20student/widgets/radio_buttons.dart';
-import 'package:student_app_getx/screens/add%20student/widgets/text_Form_fields.dart';
+import 'package:student_app_getx/screens/add%20student/widgets/text_form_fields.dart';
 
 class StudentAdd extends StatelessWidget {
   const StudentAdd({Key? key}) : super(key: key);

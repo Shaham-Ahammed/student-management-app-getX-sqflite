@@ -15,7 +15,6 @@ class StudentController extends GetxController {
     super.onInit();
   }
 
-
   fetchStudents() async {
     try {
       var studentsData = await SQLHelper.getAllData();

@@ -1,4 +1,5 @@
 import 'package:get/get.dart';
+import 'package:student_app_getx/screens/add%20student/functions/functions.dart';
 
 class StudentAddController extends GetxController {
   RxString imagpath = ''.obs;
@@ -9,12 +10,14 @@ class StudentAddController extends GetxController {
 
   @override
   void onClose() {
-   imagpath.value = '';
-   imageErrorVisible.value = false;
-   isPhotoSelected.value = false;
-   groupValue.value = '';
-   genderErrorVisible.value = false;
-   
+    imagpath.value = '';
+    imageErrorVisible.value = false;
+    isPhotoSelected.value = false;
+    groupValue.value = '';
+    genderErrorVisible.value = false;
+    nameController.clear();
+    ageController.clear();
+    phoneController.clear();
     super.onClose();
   }
 

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:student_app_getx/controllers/student_controller.dart';
 import 'package:student_app_getx/screens/add%20student/student_add_page.dart';
-import 'package:student_app_getx/screens/student_edit.dart';
+import 'package:student_app_getx/screens/edit%20student/student_edit.dart';
 import 'package:student_app_getx/screens/student_profile.dart';
 import 'dart:io';
 import '../db helper/db_helper.dart';

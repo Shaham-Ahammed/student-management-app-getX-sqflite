@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:student_app_getx/screens/add%20student/functions/functions.dart';
 
-class PhoneNumberField extends StatelessWidget {
-  const PhoneNumberField({
+class PhoneTextFormField extends StatelessWidget {
+  const PhoneTextFormField({
     super.key,
+    required this.phoneController,
   });
+
+  final TextEditingController phoneController;
 
   @override
   Widget build(BuildContext context) {
@@ -13,13 +15,10 @@ class PhoneNumberField extends StatelessWidget {
       autovalidateMode: AutovalidateMode.onUserInteraction,
       decoration: const InputDecoration(
           enabledBorder: OutlineInputBorder(
-              borderSide:
-                  BorderSide(color: Colors.cyan, width: 1),
-              borderRadius:
-                  BorderRadius.all(Radius.circular(15))),
+              borderSide: BorderSide(color: Colors.cyan, width: 1),
+              borderRadius: BorderRadius.all(Radius.circular(15))),
           border: OutlineInputBorder(
-              borderRadius:
-                  BorderRadius.all(Radius.circular(15))),
+              borderRadius: BorderRadius.all(Radius.circular(15))),
           labelText: "Phone Number"),
       keyboardType: TextInputType.phone,
       inputFormatters: [
@@ -40,10 +39,13 @@ class PhoneNumberField extends StatelessWidget {
   }
 }
 
-class AgeField extends StatelessWidget {
-  const AgeField({
+class AgeTextFormField extends StatelessWidget {
+  const AgeTextFormField({
     super.key,
+    required this.ageController,
   });
+
+  final TextEditingController ageController;
 
   @override
   Widget build(BuildContext context) {
@@ -51,13 +53,10 @@ class AgeField extends StatelessWidget {
       autovalidateMode: AutovalidateMode.onUserInteraction,
       decoration: const InputDecoration(
           enabledBorder: OutlineInputBorder(
-              borderSide:
-                  BorderSide(color: Colors.cyan, width: 1),
-              borderRadius:
-                  BorderRadius.all(Radius.circular(15))),
+              borderSide: BorderSide(color: Colors.cyan, width: 1),
+              borderRadius: BorderRadius.all(Radius.circular(15))),
           border: OutlineInputBorder(
-              borderRadius:
-                  BorderRadius.all(Radius.circular(15))),
+              borderRadius: BorderRadius.all(Radius.circular(15))),
           labelText: "Age"),
       keyboardType: TextInputType.number,
       inputFormatters: [
@@ -76,11 +75,13 @@ class AgeField extends StatelessWidget {
   }
 }
 
-
-class NameField extends StatelessWidget {
-  const NameField({
+class NameTextFormField extends StatelessWidget {
+  const NameTextFormField({
     super.key,
+    required this.nameController,
   });
+
+  final TextEditingController nameController;
 
   @override
   Widget build(BuildContext context) {
@@ -88,13 +89,10 @@ class NameField extends StatelessWidget {
       autovalidateMode: AutovalidateMode.onUserInteraction,
       decoration: const InputDecoration(
           enabledBorder: OutlineInputBorder(
-              borderSide:
-                  BorderSide(color: Colors.cyan, width: 1),
-              borderRadius:
-                  BorderRadius.all(Radius.circular(15))),
+              borderSide: BorderSide(color: Colors.cyan, width: 1),
+              borderRadius: BorderRadius.all(Radius.circular(15))),
           border: OutlineInputBorder(
-              borderRadius:
-                  BorderRadius.all(Radius.circular(15))),
+              borderRadius: BorderRadius.all(Radius.circular(15))),
           labelText: "Name"),
       keyboardType: TextInputType.name,
       controller: nameController,

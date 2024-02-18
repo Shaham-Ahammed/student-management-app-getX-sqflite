@@ -18,6 +18,7 @@ StudentAddController addController = Get.find();
   final TextEditingController ageController = TextEditingController();
 
   final TextEditingController phoneController = TextEditingController();
+  
 Future<void> addData() async {
     StudentModel stu = StudentModel(
         name: nameController.text,

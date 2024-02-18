@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:get/get_navigation/src/root/get_material_app.dart';
 import 'package:student_app_getx/controllers/initialization.dart';
 
-import 'screens/student_list.dart';
+import 'student_list.dart';
 
 void main() {
-  runApp(MyApp());
+  runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
@@ -15,10 +15,12 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return GetMaterialApp(
       initialBinding: InitializeControllers(),
-      theme:
-          ThemeData(primarySwatch: Colors.cyan, primaryColor: Colors.cyan[800],appBarTheme:AppBarTheme(backgroundColor: Colors.cyan) ),
+      theme: ThemeData(
+          primarySwatch: Colors.cyan,
+          primaryColor: Colors.cyan[800],
+          appBarTheme: const AppBarTheme(backgroundColor: Colors.cyan)),
       debugShowCheckedModeBanner: false,
-      home: StudentList(),
+      home: const StudentList(),
     );
   }
 }
