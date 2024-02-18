@@ -13,7 +13,7 @@ class StudentAddButton extends StatelessWidget {
     return FloatingActionButton(
       onPressed: () {
   Get.to(
-    curve: Curves.bounceOut,
+    curve: Curves.easeInOutQuart,
     transition: Transition.size,
     duration:Duration(milliseconds: 1300),
     ()=> const StudentAdd());

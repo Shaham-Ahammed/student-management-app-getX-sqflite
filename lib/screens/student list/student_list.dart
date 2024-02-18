@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:student_app_getx/controllers/student_controller.dart';
 import 'package:student_app_getx/screens/student%20list/widgets/add_student_button.dart';
-import 'package:student_app_getx/screens/student_profile.dart';
+import 'package:student_app_getx/screens/individual%20student/student_profile.dart';
 import 'widgets/app_bar.dart';
 import 'widgets/delete_button.dart';
 import 'widgets/edit_student_button.dart';

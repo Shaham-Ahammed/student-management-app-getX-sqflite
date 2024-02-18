@@ -1,5 +1,5 @@
 import 'package:get/get.dart';
-import 'package:student_app_getx/screens/add%20student/functions/functions.dart';
+
 
 class StudentEditController extends GetxController {
   RxString imagpath = ''.obs;
@@ -16,17 +16,6 @@ class StudentEditController extends GetxController {
     groupValue.value = groupValues;
     
   }
-
-  @override
-  void onClose() {
-    // imagpath.value = '';
-    // groupValue.value = '';
-    //    nameController.clear();
-    // ageController.clear();
-    // phoneController.clear();
-    super.onClose();
-  }
-
   addImage(String imagePath) {
     imagpath.value = imagePath;
   }
