@@ -6,12 +6,14 @@ import 'package:student_app_getx/model/student_model.dart';
 
 class StudentController extends GetxController {
   RxList<StudentModel> studentList = <StudentModel>[].obs;
+  RxList<StudentModel> filteredStudentList = <StudentModel>[].obs;
   RxBool isLoading = false.obs;
   @override
   void onInit() async {
     isLoading.value = true;
     await fetchStudents();
-    isLoading.value=false;
+    filteredStudentList.value = [...studentList];
+    isLoading.value = false;
     super.onInit();
   }
 
@@ -29,8 +31,20 @@ class StudentController extends GetxController {
             phone: student['phone']);
       }).toList();
       studentList.assignAll(students);
+      runFilter("");
     } catch (e) {
       log("$e");
+    }
+  }
+
+  runFilter(String query) {
+    if (query.isEmpty) {
+      filteredStudentList.value = [...studentList];
+    } else {
+      filteredStudentList.value = studentList
+          .where((element) =>
+              element.name.toLowerCase().contains(query.toLowerCase()))
+          .toList();
     }
   }
 }

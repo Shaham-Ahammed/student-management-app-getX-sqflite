@@ -7,8 +7,8 @@ IconButton deleteButton(
       StudentController controller, int index, BuildContext context) {
     return IconButton(
       onPressed: () {
-        deleteData(controller.studentList[index].id!,
-            controller.studentList[index].name, context);
+        deleteData(controller.filteredStudentList[index].id!,
+            controller.filteredStudentList[index].name, context);
       },
       icon: Icon(
         Icons.delete,

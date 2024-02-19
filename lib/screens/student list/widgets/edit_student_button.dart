@@ -25,12 +25,12 @@ class EditButton extends StatelessWidget {
  
           () => StudentEdit(
            
-            id: controller.studentList[index].id!,
-            name: controller.studentList[index].name,
-            age: controller.studentList[index].age,
-            image: controller.studentList[index].images,
-            gender: controller.studentList[index].gender,
-            phone: controller.studentList[index].phone));
+            id: controller.filteredStudentList[index].id!,
+            name: controller.filteredStudentList[index].name,
+            age: controller.filteredStudentList[index].age,
+            image: controller.filteredStudentList[index].images,
+            gender: controller.filteredStudentList[index].gender,
+            phone: controller.filteredStudentList[index].phone));
       },
       icon: const Icon(Icons.edit),
     );

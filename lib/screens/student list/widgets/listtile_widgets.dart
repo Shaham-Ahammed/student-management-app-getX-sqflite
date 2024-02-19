@@ -20,7 +20,7 @@ class CardTitle extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 5),
       child: Text(
-        controller.studentList[index].name,
+        controller.filteredStudentList[index].name,
         style: const TextStyle(fontSize: 20),
       ),
     );
@@ -46,7 +46,7 @@ class CardImage extends StatelessWidget {
           color: Colors.transparent, borderRadius: BorderRadius.circular(90)),
       child: ClipOval(
         child: Image.file(
-          File(controller.studentList[index].images),
+          File(controller.filteredStudentList[index].images),
           fit: BoxFit.cover,
         ),
       ),
