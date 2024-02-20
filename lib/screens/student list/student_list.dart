@@ -46,23 +46,28 @@ class StudentList extends StatelessWidget {
                           child: ListView.builder(
                             itemCount: controller.filteredStudentList.length,
                             itemBuilder: (context, index) => GestureDetector(
-                              onTap: () => Get.to(
-                                  fullscreenDialog: false,
-                                  curve: Curves.easeInOutQuart,
-                                  duration: const Duration(seconds: 2),
-                                  () => StudentProfile(
-                                      id: controller
-                                          .filteredStudentList[index].id!,
-                                      name: controller
-                                          .filteredStudentList[index].name,
-                                      age: controller
-                                          .filteredStudentList[index].age,
-                                      images: controller
-                                          .filteredStudentList[index].images,
-                                      gender: controller
-                                          .filteredStudentList[index].gender,
-                                      phone: controller
-                                          .filteredStudentList[index].phone)),
+                              onTap: () async {
+                                FocusManager.instance.primaryFocus?.unfocus();
+                                  await Future.delayed(const Duration(milliseconds: 100));
+
+                                Get.to(
+                                    fullscreenDialog: false,
+                                    curve: Curves.easeInOutQuart,
+                                    duration: const Duration(seconds: 2),
+                                    () => StudentProfile(
+                                        id: controller
+                                            .filteredStudentList[index].id!,
+                                        name: controller
+                                            .filteredStudentList[index].name,
+                                        age: controller
+                                            .filteredStudentList[index].age,
+                                        images: controller
+                                            .filteredStudentList[index].images,
+                                        gender: controller
+                                            .filteredStudentList[index].gender,
+                                        phone: controller
+                                            .filteredStudentList[index].phone));
+                              },
                               child: Card(
                                 color: Colors.cyan[100],
                                 margin: const EdgeInsets.all(15),
